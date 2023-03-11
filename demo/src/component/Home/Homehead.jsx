@@ -1,11 +1,13 @@
-import React, { useMemo } from 'react'
-import temp from "../img/temp.jpg"
-import "./Homehead.scss"
+import React, { useMemo, useState } from 'react'
+import temp from "../../img/temp.jpg"
+import "../../CSS/home.scss"
+
+
 
 export default function Homehead(props) {
-
+    const [today, setToday] = useState("20230310");
     let myprops = props.props
-    let { today } = props
+    // let { today } = props
     //时间处理 利用useMemo存状态 当today发生变化，那么这个显示的时间也会发生变化 
     let time = useMemo(() => {
         //结构 获取到月和日 
