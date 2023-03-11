@@ -57,7 +57,6 @@ export default function Home(props) {
 
             {/* 底部信息卡片 */}
             <Homenews props={props} />
-
         </div>
 
     )
