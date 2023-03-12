@@ -29,7 +29,6 @@ export default function NewsItem(props) {
         <div className='news-item-box'>
             {/* 由于父元素已经循环创建了newsItem 所以我们从父元素传递的属性中结构出需要的内容即可 */}
 
-
             <Link to={{ pathname: `detail/${id}` }}>
                 <div className='content'>
                     <div className="title">{title}</div>

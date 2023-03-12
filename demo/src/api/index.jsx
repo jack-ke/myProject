@@ -28,7 +28,7 @@ const queryNewsInfo = (id) => {
 }
 
 // 获取点赞信息
-const queryStory = (id) => {
+const queryExtra = (id) => {
     return axios.get("/api/story_extra", {
         params: {
             id
@@ -41,7 +41,7 @@ const api = {
     queryNewsBefore,
     queryNewsInfo,
     queryNewsLatest,
-    queryStory
+    queryExtra
 }
 export default api;
 // 以后就是 api.queryStory  这样来使用
