@@ -38,7 +38,7 @@ export default function Home(props) {
     //         try {
     //             // 结构请求的内容
     //             await api.queryNewsLatest().then(res => {
-    //                 console.log(res.data)
+                    // console.log(res.data)
     //                 // setBannerList(res.data.top_stories)
     //                 setNewsList(res.data.stories)
     //                 setToday(res.data.date)

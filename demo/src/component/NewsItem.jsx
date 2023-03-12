@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from 'react'
-import api from '../api';
+import React from 'react'
 import "../CSS/home.scss";
-import temp from "../img/temp.jpg"
 import { Image } from "antd-mobile"
 import { Link } from "react-router-dom"
+// 规则校验
+import propTypes from "prop-types"
 
 export default function NewsItem(props) {
-    const [newslist, setNewsList] = useState([])
-    let { myprops, info } = props
-    // console.log(myprops, info)
-    useEffect(() => {
-        (async () => {
-            try {
-                // 结构请求的内容
-                await api.queryNewsLatest().then(res => {
-                    // console.log(res.data)
-                    setNewsList(res.data.stories)
-                })
+    // 接收父元素传递过来的参数
+    let { info } = props
+    // 这里也要判断一下info的是否有值
+    if (!info) return null;
+    // 结构出所需要的内容
+    let { title, id, hint, images } = info
+    // 结构出来的img也要判断一下 如果没有就显示空 着用antd里的会有一个裂图的效果
+    // 注意看后端传入的image格式，如果是数组就进行数组判定
+    if (!Array.isArray(images)) return images = [""]
 
-            } catch (_) { console.log("g") }
-        })()
-
-    })
+    // 规则校验  就是我们接收到了父级的info 但是如果其他人输的不对 或者格式错误 就显示null
+    NewsItem.defaultProps = {
+        info: null // 默认给一个null；
+    }
+    NewsItem.propTypes = {
+        info: propTypes.object // 如果要传 格式必须是object
+    }
 
     return (
         // 新闻详细内容
         <div className='news-item-box'>
-            {/* {newslist.map(item => {
-                let { id, title } = item
-                return <div className="content" key={id}>
-                    <h4 className='title'>{title}</h4>
+            {/* 由于父元素已经循环创建了newsItem 所以我们从父元素传递的属性中结构出需要的内容即可 */}
+
+
+            <Link to={{ pathname: `detail/${id}` }}>
+                <div className='content'>
+                    <div className="title">{title}</div>
+                    <div className="author">{hint}</div>
                 </div>
-            })} */}
-            {/* 相信内容分为两部分 一部分是标题时间  一部分是图片 */}
-            <Link to={{ pathname: `detail/xxx` }}>
-                <div className="content">
-                    <h4 className="title">这是标题</h4>
-                    <div className='autor'>这是简介</div>
-                </div>
-                <Image src="xxx" alt="这是一张图片" lazy />
+                {/* 记得加上lazy 懒加载 */}
+                <Image src={images[0]} alt="这是一张图片" lazy />
             </Link>
+
         </div>
     )
+
 }

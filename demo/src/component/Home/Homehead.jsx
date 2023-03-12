@@ -9,6 +9,7 @@ export default function Homehead(props) {
     let myprops = props.props
     // let { today } = props
     //时间处理 利用useMemo存状态 当today发生变化，那么这个显示的时间也会发生变化 
+    // 为什么不用useState 原因是state如果发生了改变不会重新渲染页面，memo会重新渲染页面
     let time = useMemo(() => {
         //结构 获取到月和日 
         let [, month, day] = today.match(/^\d{4}(\d{2})(\d{2})$/)  //正则 取8位数字分4 2 2划分 后面两个就是月日
@@ -24,7 +25,7 @@ export default function Homehead(props) {
 
     //头像点击事件 点击跳转到个人user页面
     const handleImg = () => {
-        console.log(myprops)
+        // console.log(myprops)
         myprops.navigate("/login")
 
     }

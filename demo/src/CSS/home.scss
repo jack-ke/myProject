@@ -88,8 +88,8 @@
             bottom: 20px;
             padding: 0 15px;
             left: 0;
+            z-index: 99999;
 
-            // z-index: 99999;
             .title {
                 font-size: 18px;
                 color: #000;
@@ -102,7 +102,7 @@
             }
         }
 
-        // 分页器 // 修改节点的位置 X Y 
+        // 分页器 // 修改节点的位置 transform:translate(x,y) 
         .adm-page-indicator {
 
             transform: translate(140px, -3px);
@@ -179,6 +179,19 @@
             a {
                 text-decoration: none;
                 height: 100%;
+
+                // 这里有一个点，就是当信息被点击了之后，颜色会变浅
+                &:visited {
+                    .content {
+                        .title {
+                            color: #999;
+                        }
+
+                        .author {
+                            color: #999;
+                        }
+                    }
+                }
             }
 
             // 新闻内容 

@@ -11,7 +11,7 @@ const HomeSwiper = function HomeSwiper() {
         (async () => {
             try {
                 api.queryNewsLatest().then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     setBannerList(res.data.top_stories)
                 })
             } catch (_) { console.log("gg") }
