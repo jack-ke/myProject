@@ -200,7 +200,9 @@ module.exports = function (webpackEnv) {
       : isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
+    // 入口
     entry: paths.appIndexJs,
+    // entry: path.resolve(APP_PATH, "APP.jsx"),
     output: {
       // The build folder.
       path: paths.appBuild,
