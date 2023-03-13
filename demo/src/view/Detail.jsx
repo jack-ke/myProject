@@ -4,6 +4,7 @@ import { Badge } from "antd-mobile"
 import { LeftOutline, UploadOutline, LikeOutline, StarOutline, MessageOutline } from "antd-mobile-icons"
 import api from "../api/index"
 import SkeletonAgain from "../component/SkeletonAgain"
+// 异步变同步
 import { flushSync } from "react-dom"
 
 
@@ -19,7 +20,9 @@ export default function Detail(props) {
     // 处理样式方法 需要传入形参 也就是先通过后端接收到数据 然后再去更改样式
     let link;
     const handleStyle = (result) => {
+        // 结构出css
         let { css } = result;
+        // 判断是不是数组 
         if (!Array.isArray(css)) return;
         css = css[0]
         if (!css) return;
@@ -58,22 +61,18 @@ export default function Detail(props) {
                 await api.queryNewsInfo(params.id).then(res => {
                     console.log(res.data)
                     let result = res.data
-
-
+                    // 利用flushsync把异步变成同步
                     flushSync(() => {
                         setInfo(result)
                         handleStyle(result)
                     })
-
                     //处理样式 数据库自带 处理图片
                     handleImg(result)
-
-
                 })
             } catch (_) { }
         })()
 
-        // 移除link 
+        // 移除link  当有link就移除 这个的意思就是详情页跳转到其他页面进行释放
         return () => {
             if (link) document.head.removeChild(link);
         }
@@ -91,16 +90,23 @@ export default function Detail(props) {
         })()
     }, [])
 
+
+    // 点击增加点赞数
+    const hanldePop = () => {
+        // content = content++
+        // 先判断是否已经点击过了 根据颜色判断 如果颜色变了就减少并且变成灰色，没有就增加变成蓝色
+
+    }
+
     return (
         // 注意 详情页的内容结构都是服务器返回的，我们只需要调接口就好了
-        // CMS内容管理系统 toB
         <div className='detail-box'>
 
             {/* 新闻内容 */}
+            {/* dangerouslySetInnerHTML渲染富文本，也就是html的内容 需要用__html:  */}
             {info ? <div className="content" dangerouslySetInnerHTML={{ __html: info.body }}>
             </div> : <SkeletonAgain />
             }
-
 
             {/* 底部返回栏 */}
             <div className="detail-navbar-box">
@@ -111,12 +117,12 @@ export default function Detail(props) {
                 {/* 右边的图标内容 */}
                 <div className="icons">
                     {/* 如果图标上面有数字的话,就要用badge徽章,这个会在右上角显示数字 */}
+                    {/* 评论和点赞 */}
                     <Badge content={extra ? extra.comments : 0}>   <MessageOutline /> </Badge>
                     <Badge content={extra ? extra.popularity : 0}>  <LikeOutline /></Badge>
-
+                    {/* 收藏和分享 */}
                     <span> <StarOutline /></span>
                     <span> <UploadOutline /></span>
-
                 </div>
             </div>
         </div >
