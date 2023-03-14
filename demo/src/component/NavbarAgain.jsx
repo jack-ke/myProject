@@ -4,11 +4,15 @@ import PropTypes from 'prop-types'
 
 // 对ANTD组件库中的NAVBA 的 二次封装
 // 目的：对一些复杂的业务逻辑进行统一处理
-const NavbarAgain = function Navbar(props) {
+const NavbarAgain = function NavbarAgain(props) {
+    console.log(props)
     let { title } = props
+
     const handleBack = () => {
-        // 点击按钮跳转 usenavigate ... 复杂逻辑
+
     }
+    // 点击按钮跳转 usenavigate ... 复杂逻辑
+
 
     return (
         <div>
@@ -20,7 +24,7 @@ const NavbarAgain = function Navbar(props) {
 NavbarAgain.defaultProps = {
     title: "个人中心"
 }
-NavbarAgain.PropTypes = {
+NavbarAgain.PropsTypes = {
     title: PropTypes.string
 };
 
